@@ -11,7 +11,7 @@ ARGF.each_with_index do |line, idx|
   dep, old_ver, new_ver = line.scan(/^(.*)="([^"]+)" "([^"]+)"$/).last
     
     
-  stdin, stdout, stderr, wait_thr = Open3.popen3("git checkout ext.gradle && sed -i 's/^ *#{dep} = \"#{old_ver}.*$/#{dep}=\"#{new_ver}\"/' ext.gradle && git diff ext.gradle" )
+  stdin, stdout, stderr, wait_thr = Open3.popen3("git checkout ext.gradle && sed -i '' -e 's/^ *#{dep} = \"#{old_ver}.*$/#{dep}=\"#{new_ver}\"/' ext.gradle && git diff ext.gradle" )
   exit_code =  wait_thr.value
   out = stdout.gets(nil)
   stdout.close
